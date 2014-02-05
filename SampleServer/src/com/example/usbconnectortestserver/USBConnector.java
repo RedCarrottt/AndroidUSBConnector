@@ -325,12 +325,12 @@ interface USBMessageListener {
 
 // class Log {
 // public static void d(String tag, String message) {
-// System.out.println(tag +": " + message);
+// System.out.println("[DEBUG] " + tag +": " + message);
 // }
 // public static void e(String tag, String message) {
-// System.out.println(tag +": " + message);
+// System.out.println("[ERROR] " + tag +": " + message);
 // }
 // public static void i(String tag, String message) {
-// System.out.println(tag +": " + message);
+// System.out.println("[INFO] " + tag +": " + message);
 // }
 // }
