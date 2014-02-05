@@ -10,7 +10,7 @@ ADB's port-forwarding function allows host PC only act as client, not server. In
 Components
 ===================
 * Sample client: GUI application running on host PC (it uses swing)
-* Host client: Android application
+* Sample server: Android application
 
 Prerequisite
 ===================
@@ -19,7 +19,7 @@ Prerequisite
 
 How to use it in your code
 ===================
-You can pick USBConnector and ADBConnector and use it in your code. As you can see in this sample, 
+You can pick USBConnector and ADBConnector and use it in your code. As you can see in this sample, server on target device uses only USBConnector, and client on host PC uses both USBConnector and ADBConnector. ADBConnector senses connection with target device and opens a port to target device through ADB's port-forwarding function.
 
 Watch out!
 ===================
