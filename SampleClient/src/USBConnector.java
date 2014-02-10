@@ -56,6 +56,10 @@ public class USBConnector {
 		}
 	}
 
+	public int getSendBufferLength() {
+		return this.mSendBuffer.getLength();
+	}
+
 	public void addListener(USBMessageListener listener) {
 		this.mListeners.add(listener);
 	}
@@ -262,37 +266,38 @@ public class USBConnector {
 		}
 
 		public void add(String message) {
-			boolean succeed = false;
-			do {
-				if (this.getLock() == false)
-					continue;
-				this.mMessages.add(message);
-				this.putLock();
-				succeed = true;
-			} while (succeed == false);
+			while (this.getLock() == false)
+				;
+			this.mMessages.add(message);
+			this.putLock();
 		}
 
 		public String popAll() {
 			String result = "";
 
-			boolean succeed = false;
-			do {
-				if (this.getLock() == false)
-					continue;
-
-				for (String msg : this.mMessages) {
-					result = result + "\n" + msg;
-				}
-				this.mMessages.clear();
-
-				this.putLock();
-				succeed = true;
-			} while (succeed == false);
+			while (this.getLock() == false)
+				;
+			for (String msg : this.mMessages) {
+				result = result + "\n" + msg;
+			}
+			this.mMessages.clear();
+			this.putLock();
 
 			if (result.length() == 0) {
 				result = null;
 			}
 			return result;
+		}
+
+		public int getLength() {
+			int length;
+
+			while (this.getLock() == false)
+				;
+			length = this.mMessages.size();
+			this.putLock();
+
+			return length;
 		}
 
 		private boolean getLock() {
@@ -332,3 +337,4 @@ class Log {
 		System.out.println("[INFO] " + tag + ": " + message);
 	}
 }
+
